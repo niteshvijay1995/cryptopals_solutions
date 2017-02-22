@@ -56,7 +56,7 @@ class Client:
 		self.s.send(cipher)
 
 	def close(self):
-		s.close
+		self.s.close
 
 if __name__ == "__main__":
 	bar = Client()

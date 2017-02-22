@@ -24,12 +24,16 @@ p = packet['p']
 #forgery
 #packet['g'] = 1
 #packet['g'] = p
-packet['g'] = p
+packet['g'] = p-1
 c.send(json.dumps(packet))
 print "p,g sent to B"
 
 response = c.recv(1024)		#ack from B
-s1.send(response)
+response = json.loads(response)
+#response['g'] = 1
+#response['g'] = p
+response['g'] = p-1
+s1.send(json.dumps(response))
 
 packet = s1.recv(1024)		#A value from A
 packet = json.loads(packet)
@@ -47,7 +51,7 @@ s1.send(response)
 #sM = 1			#g = 1
 #sM = 0			#g = p
 #g = p-1
-if B==p-1:
+if A==p-1 and B==p-1:
 	sM = p-1
 else:
 	sM = 1
