@@ -9,7 +9,7 @@ def encrypt_CBC(plaintext,key,iv):
 	ciphertext = ''
 	last_cipher = iv
 	plaintext = chal9.pad(plaintext,16)
-	for i in range(len(plaintext)/BLOCK_SIZE-1):
+	for i in range(len(plaintext)/BLOCK_SIZE):
 		plain_block = plaintext[i*BLOCK_SIZE:(i+1)*BLOCK_SIZE]
 		plain_block = xor_data(plain_block,last_cipher)
 		last_cipher = chal7.encrypt_ECB(plain_block,key)
