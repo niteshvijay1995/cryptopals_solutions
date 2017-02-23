@@ -2,6 +2,7 @@ import sys
 
 
 class SHA1:
+    length = None
     def __init__(self):
         self.__H = [
             0x67452301,
@@ -10,6 +11,9 @@ class SHA1:
             0x10325476,
             0xC3D2E1F0
             ]
+    def __init__(self,a=0x67452301,b=0xEFCDAB89,c=0x98BADCFE,d=0x10325476,e=0xC3D2E1F0,length=None):
+        self.__H = [a,b,c,d,e]
+        SHA1.length = length
 
     def __str__(self):
         return ''.join((hex(h)[2:]).rjust(8, '0') for h in self.__H)
@@ -21,7 +25,10 @@ class SHA1:
 
     @staticmethod
     def __padding(stream):
-        l = len(stream)  # Bytes
+        if SHA1.length == None:
+            l = len(stream)  # Bytes
+        else:
+            l = SHA1.length
         hl = [int((hex(l*8)[2:]).rjust(16, '0')[i:i+2], 16)
               for i in range(0, 16, 2)]
 
@@ -117,7 +124,6 @@ class SHA1:
     def update(self, stream):
         stream = SHA1.__padding(stream)
         stream = SHA1.__prepare(stream)
-
         for block in stream:
             self.__process_block(block)
 
