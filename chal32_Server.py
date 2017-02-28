@@ -5,7 +5,7 @@ import time
 from flask import Flask,request
 import random
 app = Flask(__name__)
-DELAY = 0.05
+DELAY = 0.005
 KEY = ''
 @app.route('/test',methods=['GET'])
 def handle_request():
