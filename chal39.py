@@ -51,8 +51,10 @@ def str_to_num(a):
 
 def num_to_str(n):
 	n = hex(n)[2:]
-	if len(n)%2 != 0:
+	if n[-1] == 'L':
 		n = n[:-1]
+	if len(n)%2 != 0:
+		n = '0'+n
 	return binascii.unhexlify(n)
 
 def rsa_encrypt_str(data,key):
