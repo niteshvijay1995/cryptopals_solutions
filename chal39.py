@@ -42,8 +42,8 @@ def rsa_encrypt(data,key):
 def rsa_decrypt(cipher,key):
 	d = key[0]
 	n = key[1]
-	if cipher<0 or cipher>n:
-		raise Exception("Out of bound message - Hint: Increase your key size")
+	#if cipher<0 or cipher>n:
+	#	raise Exception("Out of bound message - Hint: Increase your key size")
 	return pow(cipher,d,n)
 
 def str_to_num(a):
