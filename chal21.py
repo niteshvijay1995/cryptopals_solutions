@@ -36,14 +36,14 @@ class random_number:
 	def extract_number(self):
 		if self.index >= self.N:
 			if self.index > self.N:
-				print 'ERROR'
-
+				raise Exception('ERROR - Generator was never seeded')
 			self.twist()
+
 		y = self.MT[self.index]
 		y = y ^ ((y >> self.U) & self.D)
 		y = y ^ ((y << self.S) & self.B)
 		y = y ^ ((y << self.T) & self.C)
-		y = y ^ (y >> 1)
+		y = y ^ (y >> self.L)
 
 		self.index = self.index + 1
 		return self.get_lower_x_bits(y,self.W)
@@ -58,10 +58,9 @@ class random_number:
 			self.MT[i] = self.MT[(i+self.M)%self.N] ^ xA
 		self.index = 0
 
-	def untemper(y):
-		y = y ^ (y << 1)
-		
-
+	def setMT(self,newMT):
+		MT = newMT
+		self.index = 0
 
 
 if __name__ == "__main__":

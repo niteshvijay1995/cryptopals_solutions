@@ -15,7 +15,7 @@ def break_seed(val):
 		r.seed_mt(seed)
 		if r.extract_number() == val:
 			print "Seed Value : ",seed
-
+			
 if __name__ == "__main__":
 	print 'Program running... Go grab some coffee, It will take time!'	
 	a = simulate_random()
