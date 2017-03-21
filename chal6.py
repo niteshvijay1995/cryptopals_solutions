@@ -13,17 +13,18 @@ def decryptRepeatingKeyXor(s, key):
 	ret = ("%x" % (int(b2a_hex(s),16)^int(b2a_hex(key),16)))
 	return a2b_hex(ret)
 
+def char2bits(a):
+	b = format(ord(a),'b')
+	if len(b)!=7:
+		b = ('0'*(7-len(b)))+b
+	return b
 
 def hamming_dist(a,b):
 	ed = 0
 	for c1,c2 in zip(a,b):
 		#print c1,c2
-		b1 = format(ord(c1),'b')
-		b2 = format(ord(c2),'b')
-		if len(b1)!=7:
-			b1 = ('0'*(7-len(b1)))+b1
-		if len(b2)!=7:
-			b2 = ('0'*(7-len(b2)))+b2
+		b1 = char2bits(c1)
+		b2 = char2bits(c2)
 		for bit1,bit2 in zip(b1,b2):
 			if bit1 != bit2:
 				ed += 1
@@ -47,6 +48,7 @@ def normalizedEditDistance(x, k):
 
 if __name__ == "__main__":
 	#Test Hammin distance function
+	print "\n"
 	if hamming_dist("this is a test","wokka wokka!!!") == 37:
 		print "SUCCESS : hamming_dist function test passed"
 	else:
